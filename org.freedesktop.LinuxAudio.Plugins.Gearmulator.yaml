@@ -1,0 +1,15 @@
+id: org.freedesktop.LinuxAudio.Plugins.Gearmulator
+branch: 24.08
+runtime: org.freedesktop.LinuxAudio.BaseExtension
+runtime-version: stable
+sdk: org.freedesktop.Sdk//24.08
+build-extension: true
+build-options:
+  prefix: /app/extensions/Plugins/gearmulator
+modules:
+  - name: Gearmulator
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: "https://github.com/dsp56300/gearmulator.git"
+        tag: "2.1.0"
