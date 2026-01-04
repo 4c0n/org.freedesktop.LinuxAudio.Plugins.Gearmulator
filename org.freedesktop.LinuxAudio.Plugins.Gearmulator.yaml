@@ -1,8 +1,8 @@
 id: org.freedesktop.LinuxAudio.Plugins.Gearmulator
 runtime: org.freedesktop.LinuxAudio.BaseExtension
 runtime-version: stable
-sdk: org.freedesktop.Sdk//25.08
-branch: "25.08"
+sdk: org.freedesktop.Sdk//24.08
+branch: "24.08"
 build-extension: true
 build-options:
   prefix: /app/extensions/Plugins/gearmulator
@@ -22,6 +22,37 @@ modules:
       - "-Dgearmulator_SYNTH_JE8086=on"
     buildsystem: cmake-ninja
     builddir: true
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /bin
+    post-install:
+      - "install -d $FLATPAK_DEST/vst3"
+      - "install -d $FLATPAK_DEST/clap"
+      - "cp -r ../bin/plugins/Release/VST3/Osirus.vst3 $FLATPAK_DEST/vst3"
+      - "strip $FLATPAK_DEST/vst3/Osirus.vst3/Contents/*/Osirus.so"
+      - "cp -r ../bin/plugins/Release/CLAP/Osirus.clap -t $FLATPAK_DEST/clap"
+      - "strip $FLATPAK_DEST/clap/Osirus.clap"
+      - "cp -r ../bin/plugins/Release/VST3/OsTIrus.vst3 $FLATPAK_DEST/vst3"
+      - "strip $FLATPAK_DEST/vst3/OsTIrus.vst3/Contents/*/OsTIrus.so"
+      - "cp -r ../bin/plugins/Release/CLAP/OsTIrus.clap -t $FLATPAK_DEST/clap"
+      - "strip $FLATPAK_DEST/clap/OsTIrus.clap"
+      - "cp -r ../bin/plugins/Release/VST3/Vavra.vst3 $FLATPAK_DEST/vst3"
+      - "strip $FLATPAK_DEST/vst3/Vavra.vst3/Contents/*/Vavra.so"
+      - "cp -r ../bin/plugins/Release/CLAP/Vavra.clap -t $FLATPAK_DEST/clap"
+      - "strip $FLATPAK_DEST/clap/Vavra.clap"
+      - "cp -r ../bin/plugins/Release/VST3/Xenia.vst3 $FLATPAK_DEST/vst3"
+      - "strip $FLATPAK_DEST/vst3/Xenia.vst3/Contents/*/Xenia.so"
+      - "cp -r ../bin/plugins/Release/CLAP/Xenia.clap -t $FLATPAK_DEST/clap"
+      - "strip $FLATPAK_DEST/clap/Xenia.clap"
+      - "cp -r ../bin/plugins/Release/VST3/NodalRed2x.vst3 $FLATPAK_DEST/vst3"
+      - "strip $FLATPAK_DEST/vst3/NodalRed2x.vst3/Contents/*/NodalRed2x.so"
+      - "cp -r ../bin/plugins/Release/CLAP/NodalRed2x.clap -t $FLATPAK_DEST/clap"
+      - "strip $FLATPAK_DEST/clap/NodalRed2x.clap"
+      - "cp -r ../bin/plugins/Release/VST3/JE8086.vst3 $FLATPAK_DEST/vst3"
+      - "strip $FLATPAK_DEST/vst3/JE8086.vst3/Contents/*/JE8086.so"
+      - "cp -r ../bin/plugins/Release/CLAP/JE8086.clap -t $FLATPAK_DEST/clap"
+      - "strip $FLATPAK_DEST/clap/JE8086.clap"
     sources:
       - type: git
         url: "https://github.com/dsp56300/gearmulator.git"
